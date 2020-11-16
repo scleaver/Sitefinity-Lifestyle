@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+*.zip
+SitefinityWebApp/App_Data/Sitefinity/Configuration/DataConfig.config

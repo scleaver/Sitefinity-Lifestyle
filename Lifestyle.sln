@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitefinityWebApp", "SitefinityWebApp\SitefinityWebApp.csproj", "{DD5559D2-ADC0-4EAE-91AA-ECC1DCC4C8ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD5559D2-ADC0-4EAE-91AA-ECC1DCC4C8ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD5559D2-ADC0-4EAE-91AA-ECC1DCC4C8ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD5559D2-ADC0-4EAE-91AA-ECC1DCC4C8ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD5559D2-ADC0-4EAE-91AA-ECC1DCC4C8ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84426C02-94EE-4220-9693-6BE8CBEA8295}
+	EndGlobalSection
+EndGlobal
