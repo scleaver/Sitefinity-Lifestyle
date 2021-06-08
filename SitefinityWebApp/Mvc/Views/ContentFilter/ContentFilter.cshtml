@@ -1,0 +1,50 @@
+﻿@model  SitefinityWebApp.Mvc.Models.ContentFilter.ContentFilterViewModel
+
+@using Telerik.Sitefinity.Frontend.Mvc.Helpers;
+
+@Html.Script("Mvc/Scripts/content-filter.js")
+
+<div id="randomId" class="single-sidebar-widget p-30 content-filter" data-sf-role="contentFilter">
+    <!-- Section Title -->
+    <div class="section-heading">
+        <h5>Refine news</h5>
+    </div>
+
+    <div class="filter filter--search">
+        <h6>Search</h6>
+        <input type="text" data-sf-role="cfSearchTextBox" class="form-control"
+               placeholder="Enter keywords">
+        <input type="hidden" data-sf-role="cfIndexCatalogue" value="@Model.IndexCatalogue" />
+        <input type="hidden" data-sf-role="cfLanguage" value="@Model.Language" />
+    </div>
+
+    <div class="filter filter--sortby">
+        <h6>Sort by</h6>
+        <select data-sf-role="cfSortBySelect" class="form-control">
+            <option value="" selected>Default</option>
+            <option value="publication-date-desc">Newest</option>
+            <option value="publication-date-asc">Oldest</option>
+            <option value="title-asc">Title A-Z</option>
+            <option value="title-desc">Title Z-A</option>
+        </select>
+    </div>
+    @if (Model.Tags.Count > 0)
+    {
+        <div class="filter filter--tags">
+            <!-- do this first -->
+            <h6>Tags</h6>
+            <ul class="tags-widgets" data-sf-role="cfTagsList">
+                @foreach (var taxon in Model.Tags)
+                {
+                    <li>
+                        <input type="checkbox" id="tag-@taxon.UrlName" name="tags" value="@taxon.UrlName"><label for="tag-@taxon.UrlName">@taxon.Title</label>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+    <input type="hidden" data-sf-role="cfListPageUrl" value="@Model.ListPageUrl" />
+    <input type="hidden" data-sf-role="cfPrefix" value="@Model.ParamPrefix" />
+    <button type="button" data-sf-role="cfButton" class="btn mag-btn w-100">Refine</button>
+    <button type="button" data-sf-role="cfReset" class="btn w-100">Reset</button>
+</div>

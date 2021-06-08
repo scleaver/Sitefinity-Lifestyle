@@ -1,6 +1,4 @@
-﻿
-
-using SitefinityWebApp.Custom.Models;
+﻿using SitefinityWebApp.Custom.Models;
 using System;
 using Telerik.Sitefinity.Abstractions;
 using Telerik.Sitefinity.Configuration;

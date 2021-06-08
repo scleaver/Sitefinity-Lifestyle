@@ -3,39 +3,68 @@
 @using Telerik.Sitefinity.Frontend.Mvc.Helpers;
 @using Telerik.Sitefinity.Modules.Pages;
 @using Telerik.Sitefinity.Web.DataResolving;
+@using Telerik.Sitefinity.Libraries.Model;
+@using Telerik.Sitefinity.RelatedData;
+@using Telerik.Sitefinity.Modules.Libraries;
 
-<div class="@Model.CssClass">
-    <ul class="list-unstyled">
-        @foreach (var item in Model.Items)
+<div class="archive-posts-area bg-white p-30 mb-30 box-shadow @Model.CssClass">
+    @if (Model.Items.Count() > 0)
+    {
+        foreach (var item in Model.Items)
         {
             var navigateUrl = HyperLinkHelpers.GetDetailPageUrl(item, ViewBag.DetailsPageId, ViewBag.OpenInSamePage, Model.UrlKeyPrefix);
+            var image = item.DataItem.GetRelatedItems<Image>("FeaturedImage").FirstOrDefault();
             
-            <li @Html.InlineEditingAttributes(Model.ProviderName, Model.ContentType.FullName, (Guid)item.Fields.Id)>
-				<h3>
-					<a @Html.InlineEditingFieldAttributes("Title", "ShortText") href="@navigateUrl">@item.Fields.Title</a>
-				</h3>
-                
-                <div>
-				    <span class="text-muted">
-					    @item.GetDateTime("PublicationDate", "MMM d, yyyy, HH:mm tt")
-					    @Html.Resource("By")
-					    @DataResolver.Resolve(item.DataItem, "Author", null)
-				    </span>
-                    @Html.CommentsCount((string)navigateUrl, item.DataItem)
+            <!-- Single Catagory Post -->
+            <div class="single-catagory-post d-flex flex-wrap">
+                <!-- Thumbnail -->
+                <!-- Link should link to news article detail -->
+                @if (image != null)
+                {
+                <a href="@navigateUrl" class="post-thumbnail bg-img" style="background-image: url(@image.ResolveThumbnailUrl("post-list"))">
+                </a>
+                }
+
+                <!-- Post Contetnt -->
+                <div class="post-content">
+                    <div class="post-meta">
+                        <!-- Leave the link as hash for now -->
+                        <a href="#">@item.GetDateTime("PublicationDate", "MMM d, yyyy")</a>
+                        <!-- Leave the link as hash for now -->
+                        <a href="#">lifestyle</a>
+                    </div>
+
+                    <!-- Link should link to news article detail -->
+                    <a href="@navigateUrl" class="post-title">
+                        @item.Fields.Title
+                    </a>
+
+                    <!-- Post Meta -->
+                    <!-- Leave these links as hash for now -->
+                    <div class="post-meta-2">
+                        <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 1034</a>
+                        <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 834</a>
+                        <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 234</a>
+                    </div>
+                    <p>
+                        @item.Fields.Summary
+                    </p>
                 </div>
-
-				<div @Html.InlineEditingFieldAttributes("Summary", "ShortText")>@Html.HtmlSanitize((string)item.Fields.Summary)</div>
-
-				<a href="@navigateUrl">@Html.Resource("FullStory")</a>
-			</li>
+            </div>
         }
-    </ul>
-
-    @if (Model.ShowPager)
-    {
-        @Html.Action("Index", "ContentPager", new { currentPage = Model.CurrentPage,
-                        totalPagesCount = Model.TotalPagesCount.Value,
-                        redirectUrlTemplate = ViewBag.RedirectPageUrlTemplate })
     }
+    else
+    {
+        <div class="alert alert-info">No results.</div>
+    }
+
+        @if (Model.ShowPager)
+        {
+    @Html.Action("Index", "ContentPager", new
+    {
+        currentPage = Model.CurrentPage,
+        totalPagesCount = Model.TotalPagesCount.Value,
+        redirectUrlTemplate = ViewBag.RedirectPageUrlTemplate
+    })}
 
 </div>

@@ -1255,6 +1255,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="InterfaceMappings.cs" />
+    <Compile Include="Mvc\Controllers\ContentFilterController.cs" />
+    <Compile Include="Mvc\Models\ContentFilter\ContentFilterModel.cs" />
+    <Compile Include="Mvc\Models\ContentFilter\ContentFilterViewModel.cs" />
+    <Compile Include="Mvc\Models\ContentFilter\IContentFilterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1275,6 +1280,7 @@
     <Content Include="App_Data\RadSpell\en-US.tdf" />
     <Content Include="App_Data\RadSpell\de-DE.tdf" />
     <Content Include="App_Data\GeoLocation\GeoLite2-City.mmdb" />
+    <Content Include="Mvc\Views\ContentFilter\ContentFilter.cshtml" />
     <None Include="packages.config" />
     <Content Include="SampleTemplate.cshtml">
       <Generator>RazorGenerator</Generator>

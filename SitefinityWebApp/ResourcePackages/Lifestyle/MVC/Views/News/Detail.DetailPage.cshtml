@@ -2,24 +2,57 @@
 
 @using Telerik.Sitefinity.Frontend.Mvc.Helpers;
 @using Telerik.Sitefinity.Web.DataResolving;
-
-<div class="@Model.CssClass" @Html.InlineEditingAttributes(Model.ProviderName, Model.ContentType.FullName, (Guid)Model.Item.Fields.Id)>
-    <h3>
-        <span @Html.InlineEditingFieldAttributes("Title", "ShortText")>@Model.Item.Fields.Title</span>
-
-    </h3>
-
-    <div>
-        @Model.Item.GetDateTime("PublicationDate", "MMM d, yyyy, HH:mm tt")
-        @Html.Resource("By")
-        @DataResolver.Resolve(@Model.Item.DataItem, "Author", null)
-
-        @Html.CommentsCount(string.Empty, @Model.Item.DataItem)
+@using Telerik.Sitefinity.Libraries.Model;
+@using Telerik.Sitefinity.RelatedData;
+@using Telerik.Sitefinity.Modules.Libraries;
+@{ 
+    var image = Model.Item.DataItem.GetRelatedItems<Image>("FeaturedImage").FirstOrDefault();
+}
+<div class="post-details-content bg-white mb-30 p-30 box-shadow @Model.CssClass">
+    <div class="blog-thumb mb-30">
+        <img src="@image.ResolveThumbnailUrl("postdetail")" alt="@image.AlternativeText">
     </div>
+    <div class="blog-content">
+        <div class="post-meta">
+            <a href="#">@Model.Item.GetDateTime("PublicationDate", "MMM d, yyyy")</a>
+            <a href="archive.html">lifestyle</a>
+        </div>
+        <h4 class="post-title">@Model.Item.Fields.Title</h4>
+        <!-- Post Meta -->
+        <div class="post-meta-2">
+            <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 1034</a>
+            <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 834</a>
+            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 234</a>
+        </div>
 
-    <div @Html.InlineEditingFieldAttributes("Summary", "LongText")>@Html.HtmlSanitize((string)Model.Item.Fields.Summary)</div>
+        @Html.HtmlSanitize((string)Model.Item.Fields.Content)
 
-    <div @Html.InlineEditingFieldAttributes("Content", "LongText")>@Html.HtmlSanitize((string)Model.Item.Fields.Content)</div>
+        <!-- Like Dislike Share -->
+        <div class="like-dislike-share my-5">
+            <h4 class="share">240<span>Share</span></h4>
+            <a href="#" class="facebook">
+                <i class="fa fa-facebook" aria-hidden="true"></i> Share on
+                Facebook
+            </a>
+            <a href="#" class="twitter">
+                <i class="fa fa-twitter" aria-hidden="true"></i> Share on
+                Twitter
+            </a>
+        </div>
 
-    @Html.CommentsList(@Model.Item.DataItem)
+        <!-- Post Author -->
+        <div class="post-author d-flex align-items-center">
+            <div class="post-author-thumb">
+                <img src="img/bg-img/52.jpg" alt="">
+            </div>
+            <div class="post-author-desc pl-4">
+                <a href="#" class="author-name">@DataResolver.Resolve(@Model.Item.DataItem, "Author", null)</a>
+                <p>
+                    Duis tincidunt turpis sodales, tincidunt nisi et, auctor nisi. Curabitur
+                    vulputate sapien eu metus ultricies fermentum nec vel augue. Maecenas eget
+                    lacinia est.
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
